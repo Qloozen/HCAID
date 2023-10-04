@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  smart-lungs:
+    container_name: smart-lungs
+    build:
+      context: ../
+      dockerfile: dev.Dockerfile
+    # environment:
+    # NEXT_MY_ENV
+    volumes:
+      - ../src:/app/src
+      - ../public:/app/public
+    restart: always
+    pull_policy: build

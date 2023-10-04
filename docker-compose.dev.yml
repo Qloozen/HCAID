@@ -1,0 +1,16 @@
+version: "3.4"
+
+services:
+  lung-vitality:
+    extends:
+      file: lung-vitality/docker/docker-services.dev.yml
+      service: lung-vitality
+    ports:
+      - "3001:3000"
+
+  smart-lungs:
+    extends:
+      file: smart-lungs/docker/docker-services.dev.yml
+      service: smart-lungs
+    ports:
+      - "3002:3000"
