@@ -14,7 +14,7 @@ services:
       service: smart-lungs
     pull_policy: build
     restart: always
-# networks:
-#   default:
-#     name: nginxproxymanager_default
-#     external: true
+networks:
+  default:
+    name: nginxproxymanager_default
+    external: true
