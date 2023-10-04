@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  lung-vitality:
+    container_name: web
+    build:
+      context: ../
+      dockerfile: prod.Dockerfile
+      # args:
+      #   ARG NEXT_MY_ENV_VAR: ${ARG NEXT_MY_ENV_VAR}
