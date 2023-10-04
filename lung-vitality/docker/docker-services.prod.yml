@@ -2,7 +2,7 @@ version: "3"
 
 services:
   lung-vitality:
-    container_name: web
+    container_name: lung-vitality
     build:
       context: ../
       dockerfile: prod.Dockerfile
