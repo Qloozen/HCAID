@@ -1,0 +1,21 @@
+version: "3.4"
+
+services:
+  lung-vitality:
+    extends:
+      file: lung-vitality/docker/docker-services.dev.yml
+      service: lung-vitality
+    pull_policy: build
+    restart: always
+
+  smart-lungs:
+    extends:
+      file: smart-lungs/docker/docker-services.dev.yml
+      service: smart-lungs
+    pull_policy: build
+    restart: always
+
+networks:
+  default:
+    name: nginxproxymanager_default
+    external: true

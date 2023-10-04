@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  lung-vitality:
+    container_name: lung-vitality
+    build:
+      context: ../
+      dockerfile: dev.Dockerfile
+    # environment:
+    # NEXT_MY_ENV
+    volumes:
+      - ../src:/app/src
+      - ../public:/app/public
+    restart: always
+    pull_policy: build
