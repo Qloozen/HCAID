@@ -13,7 +13,7 @@ HCAID is part of our minor Artificial Intelligence. This module focus on the des
 Both websites are made with the framework NextJS. To run the website locally, you can use the 'docker-compose.dev.yml' file to launch a development environment for both applications, available on http://localhost:3001 and http://localhost:3002. To do this, you need to have Docker installed on your computer. If you don't have Docker installed, you can also run the applications locally by installing NodeJS.
 
 ** Launch the development environment with Docker **
-Inside the root folder: 'docker compose -f docker-compose.dev.yml up'
+Inside the root folder: 'docker compose -f docker-compose.dev.yml up -d'
 
 ## 4. Deployment
 
