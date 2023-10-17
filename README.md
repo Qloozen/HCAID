@@ -5,7 +5,7 @@
 HCAID is part of our minor Artificial Intelligence. This module focus on the design of AI systems by following some guidelines on how to design a user-centric AI-based app. Because AI makes it possible to make predictions, it increases our ability to make decisions. However, the user must be central when designing a prescribed AI system. Otherwise we lose the capacity for free choice. That is why we use Design Thinking to create a solution in which humans and the AI system are complementary to each other and people retain the ability to make free choices.
 
 ## 2. Our idea
-Machine learning can be used to make predictions to give insight in various topics. We have developed an AI model that can predict is you are likely to have lung cancer or not. Of course this topic can impact the users if they don't know how the machine learning model works and how well the predictions are. Our good application "Lung Vitality" will need to account for:
+Machine learning can be used to make predictions to give insight in various topics. We have developed an AI model that can predict if you are likely to have lung cancer or not. Of course this topic can impact the users if they don't know how the machine learning model works and how well the predictions are. Our good application "Lung Vitality" will need to account for:
 - **privacy**: if data gets collected, it will be non-identifiable and the user will get notified if they want to share this information or not.
 - **bias**: at what level is the application biased ? what could be the impact on the users ?
 - **explainability**: the application should give the user an explanation on how the predictions are made and how the system works.
