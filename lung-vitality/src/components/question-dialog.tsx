@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
-import StyledButton from "./styled-button";
 import QuestionForm from "./question-form";
 import PrivacyMessage from "./privacy-message";
 import TestResults from "./test-results";
