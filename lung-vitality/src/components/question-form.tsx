@@ -39,9 +39,10 @@ const formSchema = z.object({
 
 type Props = {
   className?: string;
+  nextPage: () => void;
 };
 
-const QuestionForm = ({ className }: Props) => {
+const QuestionForm = ({ className, nextPage }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,6 +53,7 @@ const QuestionForm = ({ className }: Props) => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // TODO: integration with machine learning model
     console.log(values);
+    nextPage();
   }
 
   const frequencyOptions = (

@@ -4,34 +4,44 @@ import { Dialog, DialogTrigger, DialogContent } from "./ui/dialog";
 import StyledButton from "./styled-button";
 import QuestionForm from "./question-form";
 import PrivacyMessage from "./privacy-message";
+import TestResults from "./test-results";
+import { Button } from "./ui/button";
 
 type Props = {};
 
 const QuestionDialog = (props: Props) => {
   const [open, setOpen] = useState(false);
-  const [showPrivacy, setShowPrivacy] = useState(true);
   const [allowData, setAllowData] = useState(true);
+  const [pageIndex, setPageIndex] = useState(0);
 
   useEffect(() => {
-    if (!open) {
-      setShowPrivacy(true);
-    }
+    setPageIndex(0);
   }, [open]);
+
+  const nextPage = () => {
+    if (pageIndex < pages.length - 1) {
+      setPageIndex(pageIndex + 1);
+    } else {
+      setOpen(false);
+    }
+  };
+
+  const pages = [
+    <PrivacyMessage key={0} nextPage={nextPage} setAllowData={setAllowData} />,
+    <QuestionForm key={1} nextPage={nextPage} />,
+    <TestResults key={2} nextPage={nextPage} />,
+  ];
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <StyledButton title="Start the test" className="mt-5" />
+        <Button className="mt-5 bg-main" onClick={() => nextPage()}>
+          Start the text
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="max-h-[75%] w-fit max-w-5xl overflow-x-hidden overflow-y-scroll p-10 md:w-fit">
-        <QuestionForm className={showPrivacy ? "hidden" : "inline-block"} />
-        <PrivacyMessage
-          className={showPrivacy ? "flex" : "hidden"}
-          showPrivacy={showPrivacy}
-          setShowPrivacy={setShowPrivacy}
-          setAllowData={setAllowData}
-        />
+        {pages[pageIndex]}
       </DialogContent>
     </Dialog>
   );

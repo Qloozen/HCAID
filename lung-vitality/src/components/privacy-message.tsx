@@ -6,17 +6,11 @@ import { cn } from "@/lib/utils";
 
 type Props = {
   className?: string;
-  showPrivacy: boolean;
-  setShowPrivacy: (showPrivacy: boolean) => void;
+  nextPage: () => void;
   setAllowData: (allowData: boolean) => void;
 };
 
-const PrivacyMessage = ({
-  className,
-  showPrivacy,
-  setAllowData,
-  setShowPrivacy,
-}: Props) => {
+const PrivacyMessage = ({ className, nextPage, setAllowData }: Props) => {
   return (
     <div className={cn("flex max-w-md flex-col gap-8", className)}>
       <DialogHeader>
@@ -44,7 +38,7 @@ const PrivacyMessage = ({
           </label>
         </div>
       </div>
-      <Button onClick={() => setShowPrivacy(!showPrivacy)}>Continue</Button>
+      <Button onClick={() => nextPage()}>Continue</Button>
     </div>
   );
 };
