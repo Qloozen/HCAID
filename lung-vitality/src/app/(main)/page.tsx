@@ -1,6 +1,6 @@
 import Image from "next/image";
 import medicineSvg from "../../../public/medicine.svg";
-import StyledButton from "@/components/styled-button";
+import QuestionDialog from "@/components/question-dialog";
 
 export default function Home() {
   return (
@@ -22,7 +22,7 @@ export default function Home() {
           officiis sapiente. Accusantium voluptas necessitatibus ad deserunt
           provident fugit quidem.
         </p>
-        <StyledButton title="Start the test" className="mt-5" />
+        <QuestionDialog />
       </div>
 
       <Image
