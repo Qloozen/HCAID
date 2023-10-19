@@ -9,7 +9,6 @@ type Props = {};
 
 const QuestionDialog = (props: Props) => {
   const [open, setOpen] = useState(false);
-  const [allowData, setAllowData] = useState(true);
   const [pageIndex, setPageIndex] = useState(0);
 
   useEffect(() => {
