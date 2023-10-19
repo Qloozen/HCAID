@@ -113,7 +113,7 @@ const QuestionForm = ({ className, nextPage }: Props) => {
           />
           <FormField
             control={form.control}
-            name="name"
+            name="location"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Location</FormLabel>
