@@ -20,16 +20,22 @@ const TestResults = ({ className, nextPage }: Props) => {
         You are most likely to have lung cancer.
       </h2>
 
+      {/* TODO: Find some working links and add if possible */}
+
       <p>
         There is a high chance that you have lung cancer. From the data you
         input we also know you smoke. We have told the benefits of e-cigarettes
-        before, but also verified <span className="text-main underline">research has shown</span> that e-cigarettes are safer
-        than normal cigarettes. By switching from normal cigarettes to
-        e-cigarettes a person can reduce their risk at lung cancer by 10-20%.
+        before, but also verified <span className="text-main underline">research has shown</span> that
+        e-cigarettes are safer than normal cigarettes. By switching from normal
+        cigarettes to e-cigarettes a person can reduce their risk at lung cancer
+        by 10-20%.
+        <br />
+        <br />
+        To defeat lung cancer Smart Lungs has teamed up with several
+        e-cigarettes sellers to help people switch from cigarettes to
+        e-cigarettes. By using the code <span className="text-main bold">DefeatLungCancer2023</span> users can
+        receive up to <span className="text-main bold">20%</span> off at the <span className="text-main underline">following sellers.</span>
       </p>
-      <Link href={"/explanation"}>
-        <span className="text-main underline">more info</span>
-      </Link>
 
       <Button className="bg-main" onClick={() => nextPage()}>
         Continue
