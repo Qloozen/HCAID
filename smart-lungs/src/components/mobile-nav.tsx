@@ -68,7 +68,7 @@ const MobileNav = ({ className }: Props) => {
       >
         <div className="flex gap-5">
           <Image src={logo} alt="logo" width={30} />
-          <h1 className="text-main text-xl font-bold">Lung Vitality</h1>
+          <h1 className="text-main text-xl font-bold">Smart Lungs</h1>
         </div>
         {links.map((link) => (
           <Link

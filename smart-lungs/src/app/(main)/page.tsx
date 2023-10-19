@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="m-auto flex min-h-screen items-start justify-center gap-10 lg:w-2/3">
       <div className="flex flex-col items-center gap-10 md:items-start md:gap-0">
-        <h1 className="mb-6 text-6xl font-bold">Lung Vitality</h1>
+        <h1 className="mb-6 text-6xl font-bold">Smart Lungs</h1>
         <p className="mb-4 text-2xl text-main">
           Find out if you have lung cancer
         </p>
