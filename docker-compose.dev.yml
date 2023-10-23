@@ -14,3 +14,10 @@ services:
       service: smart-lungs
     ports:
       - "3002:3000"
+
+  api:
+    extends:
+      file: api/docker-services.yml
+      service: api
+    ports:
+      - "5000:5000"

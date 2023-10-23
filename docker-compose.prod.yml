@@ -14,6 +14,14 @@ services:
       service: smart-lungs
     pull_policy: build
     restart: always
+
+  api:
+    extends:
+      file: api/docker-services.yml
+      service: api
+    pull_policy: build
+    restart: always
+
 networks:
   default:
     name: nginxproxymanager_default
