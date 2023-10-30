@@ -32,12 +32,8 @@ const formSchema = z.object({
     .int()
     .min(16, { message: "You must be at least 16 years old." }),
   gender: z.enum(["male", "female"]),
-  drinking: z.enum(["never", "rarely", "often", "daily"]),
-  troubleSwallowing: z.enum(["never", "rarely", "often", "daily"]),
-  coughing: z.enum(["never", "rarely", "often", "daily"]),
-  chestPainLevel: z.enum(["none", "mild", "moderate", "severe"]),
-  fatigue: z.enum(["never", "rarely", "often", "daily"]),
   smoking: z.enum(["never", "rarely", "often", "daily"]),
+  allergies: z.string().min(2, { message: "Allergies must be at least 2 characters long." }),
 });
 
 type Props = {
@@ -173,115 +169,6 @@ const QuestionForm = ({ className, nextPage }: Props) => {
           />
           <FormField
             control={form.control}
-            name="drinking"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>How often do you drink alcohol?</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Select frequency" />
-                    </SelectTrigger>
-                  </FormControl>
-
-                  {frequencyOptions}
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="troubleSwallowing"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Do you often have trouble swallowing?</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Select frequency" />
-                    </SelectTrigger>
-                  </FormControl>
-
-                  {frequencyOptions}
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="coughing"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>How ofter do you cough?</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Frequency" />
-                    </SelectTrigger>
-                  </FormControl>
-
-                  {frequencyOptions}
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="chestPainLevel"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Do you experience any chest pain?</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Select frequency" />
-                    </SelectTrigger>
-                  </FormControl>
-                  {severityOptions}
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="fatigue"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>How often do you feel fatigue?</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Select frequency" />
-                    </SelectTrigger>
-                  </FormControl>
-
-                  {frequencyOptions}
-                </Select>{" "}
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
             name="smoking"
             render={({ field }) => (
               <FormItem>
@@ -302,6 +189,24 @@ const QuestionForm = ({ className, nextPage }: Props) => {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="allergies"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Do you have any allergies?</FormLabel>
+                <FormControl>
+                  <Input
+                    className="w-min"
+                    type="text"
+                    {...field}
+                    onChange={field.onChange}
+                  />
+                </FormControl>
+                <FormDescription>What are your allergies?</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}/>
           <Button type="submit">Submit</Button>
         </form>
       </Form>
