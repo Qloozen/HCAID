@@ -71,15 +71,6 @@ const QuestionForm = ({ className, nextPage }: Props) => {
     </SelectContent>
   );
 
-  const severityOptions = (
-    <SelectContent>
-      <SelectItem value="none">none</SelectItem>
-      <SelectItem value="mild">mild</SelectItem>
-      <SelectItem value="moderate">moderate</SelectItem>
-      <SelectItem value="severe">severe</SelectItem>
-    </SelectContent>
-  );
-
   return (
     <div className={cn("w-[75vw]", className)}>
       <DialogHeader>
