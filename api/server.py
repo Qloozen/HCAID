@@ -14,7 +14,7 @@ def do_prediction():
     df = pd.DataFrame(json, index=[0])
 
     # predict
-    model = joblib.load('models/rf_model.pkl')
+    model = joblib.load('models/rf_model_v2.pkl')
     y_predict = model.predict(df)
     predicted_cancer = int(y_predict[0])
     
