@@ -12,12 +12,16 @@ const QuestionDialog = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [allowData, setAllowData] = useState(true);
   const [pageIndex, setPageIndex] = useState(0);
+  const [testResults, setTestResults] = useState({ cancer: "", force_plt: "" });
 
   useEffect(() => {
     setPageIndex(0);
   }, [open]);
 
-  const nextPage = () => {
+  const nextPage = (results?: { cancer: string; force_plt: string }) => {
+    if (results) {
+      setTestResults(results);
+    }
     if (pageIndex < pages.length - 1) {
       setPageIndex(pageIndex + 1);
     } else {
@@ -28,7 +32,7 @@ const QuestionDialog = (props: Props) => {
   const pages = [
     <PrivacyMessage key={0} nextPage={nextPage} setAllowData={setAllowData} />,
     <QuestionForm key={1} nextPage={nextPage} />,
-    <TestResults key={2} nextPage={nextPage} />,
+    <TestResults key={2} nextPage={nextPage} testResults={testResults} />,
   ];
 
   return (
@@ -39,7 +43,7 @@ const QuestionDialog = (props: Props) => {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-h-[75%] w-fit max-w-5xl overflow-x-hidden overflow-y-scroll p-10 md:w-fit">
+      <DialogContent className="max-h-[75%] w-fit max-w-[90%] overflow-x-hidden overflow-y-scroll p-10">
         {pages[pageIndex]}
       </DialogContent>
     </Dialog>
