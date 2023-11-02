@@ -6,16 +6,24 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useEffect, useState } from "react";
 type Props = {};
 
+type Feedback = {
+  key: string;
+  feedback: string;
+  rating: string;
+  fullName: string | undefined;
+};
+
 const Experiences = (props: Props) => {
-  const feedback_raw = localStorage.getItem("feedbacks");
-  const feedback: {
-    key: string;
-    feedback: string;
-    rating: string;
-    fullName: string | undefined;
-  }[] = feedback_raw ? JSON.parse(feedback_raw) : [];
+  const [feedback, setFeedback] = useState<Feedback[]>([]);
+
+  useEffect(() => {
+    const feedback_raw = localStorage.getItem("feedbacks");
+    const feedback: Feedback[] = feedback_raw ? JSON.parse(feedback_raw) : [];
+    setFeedback(feedback);
+  }, []);
 
   return (
     <div className="m-auto flex w-1/2 flex-col gap-10">
