@@ -14,13 +14,16 @@ export default function Home() {
           width={300}
         />
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis
-          beatae sint ipsam asperiores recusandae quos. In, vitae. Veniam,
-          minima! Fugiat eius recusandae alias dolor animi. Incidunt
-          perspiciatis earum numquam ea dignissimos, consequuntur quisquam eaque
-          voluptatum exercitationem, asperiores molestiae illum? Accusantium,
-          officiis sapiente. Accusantium voluptas necessitatibus ad deserunt
-          provident fugit quidem.
+          In a world where our health often takes a back seat to our busy lives,
+          the importance of accessible, ethical, and reliable health resources
+          cannot be overstated. The Lung Vitality website is a digital platform
+          designed to empower individuals to take control of their lung health
+          and foster early detection of potential lung cancer risk, all while
+          adhering to the highest ethical standards.
+          <br />
+          <br />
+          Based on some common symptoms of lung cancer, The test will try to
+          predict whether you are likely to Have lung cancer or not. Try it now:
         </p>
         <QuestionDialog />
       </div>

@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardContent,
@@ -7,63 +8,31 @@ import {
 } from "@/components/ui/card";
 type Props = {};
 
-const reviews = [
-  {
-    key: 0,
-    rating: "4",
-    fullName: "John Doe",
-    feedback:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam, voluptatum.",
-  },
-  {
-    key: 1,
-    rating: "5",
-    fullName: "Jane Doe",
-    feedback:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam, voluptatum.",
-  },
-  {
-    key: 2,
-    rating: "3",
-    fullName: "John Doe",
-    feedback:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam, voluptatum.",
-  },
-  {
-    key: 3,
-    rating: "4",
-    fullName: "Jane Doe",
-    feedback:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam, voluptatum.",
-  },
-  {
-    key: 4,
-    rating: "5",
-    fullName: "John Doe",
-    feedback:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam, voluptatum.",
-  },
-  {
-    key: 5,
-    rating: "3",
-    fullName: "Jane Doe",
-    feedback:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Quisquam, voluptatum.",
-  },
-];
-
 const Experiences = (props: Props) => {
+  const feedback_raw = localStorage.getItem("feedbacks");
+  const feedback: {
+    key: string;
+    feedback: string;
+    rating: string;
+    fullName: string | undefined;
+  }[] = feedback_raw ? JSON.parse(feedback_raw) : [];
+
   return (
     <div className="m-auto flex w-1/2 flex-col gap-10">
       <h1 className="text-3xl font-bold">Reviews</h1>
-      {reviews.map((review) => (
-        <Card key={review.key}>
+      {feedback.length < 1 && <p>No reviews yet</p>}
+      {feedback.map((feedback) => (
+        <Card key={feedback.key}>
           <CardHeader>
-            <CardTitle>{review.fullName}</CardTitle>
-            <CardDescription>Rating: {review.rating}/5</CardDescription>
+            <CardTitle>
+              {feedback.fullName || feedback.feedback.trim().length < 1
+                ? feedback.fullName
+                : "Anonymous"}
+            </CardTitle>
+            <CardDescription>Rating: {feedback.rating}/5</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>{review.feedback}</p>
+            <p>{feedback.feedback}</p>
           </CardContent>
         </Card>
       ))}

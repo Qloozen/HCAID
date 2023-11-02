@@ -8,19 +8,22 @@ const Explanation = (props: Props) => {
   // Frequently asked Questions of our lung vitality test that works with machine learning model
   const questions = [
     {
-      question: "What is the lung vitality test ?",
-      answer:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aliquid impedit veniam rerum nisi voluptates dolorum incidunt dicta quaerat hic in aspernatur rem expedita a deserunt, aut adipisci soluta, nobis eius perferendis neque qui repellendus aperiam. Officia quos dolore officiis odio doloremque? Blanditiis cum distinctio dolor excepturi illum perspiciatis? Laborum!",
+      question: "How accurate are these predictions?",
+      answer: `The test is roughly an prediction about whether you are likely to 
+        have lung cancer. To accomplish a good prediction model we have
+        used robust machine learning models and the predictions are evaluated
+        above 90% accuracy. Take into account that however this may sound 
+        a lot, the model is not correct in all cases. The symptoms and other features used to train
+        this model are also not exhaustive, meaning these are just some
+        common symptoms that may be related to lung cancer. We 
+        recommend to always check in with your doctor first.`,
     },
     {
-      question: "How does the lung vitality test work ?",
-      answer:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aliquid impedit veniam rerum nisi voluptates dolorum incidunt dicta quaerat hic in aspernatur rem expedita a deserunt, aut adipisci soluta, nobis eius perferendis neque qui repellendus aperiam. Officia quos dolore officiis odio doloremque? Blanditiis cum distinctio dolor excepturi illum perspiciatis? Laborum!",
-    },
-    {
-      question: "How accurate is the lung vitality test ?",
-      answer:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aliquid impedit veniam rerum nisi voluptates dolorum incidunt dicta quaerat hic in aspernatur rem expedita a deserunt, aut adipisci soluta, nobis eius perferendis neque qui repellendus aperiam. Officia quos dolore officiis odio doloremque? Blanditiis cum distinctio dolor excepturi illum perspiciatis? Laborum!",
+      question: "Is my data secure with Lung Vitality?",
+      answer: `Your data will be secure with Lung Vitality. We only use test data for
+        evaluation and improvements to the model. Data will not be used for
+        any commercial purposes. If you do not consent to share any test data, 
+        Lung Vitality will not store any data. `,
     },
   ];
   return (
@@ -28,30 +31,22 @@ const Explanation = (props: Props) => {
       <h1 className="text-4xl font-bold">Explanation</h1>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-2xl font-bold">About this webiste</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo et alias
-          totam culpa, assumenda consectetur nobis officia perspiciatis.
-          Repellat, mollitia eius non nulla optio, quae soluta nemo placeat cum,
-          tenetur maiores iure? Consequatur, laudantium expedita officiis est
-          dolorem minima ullam illum deleniti, cupiditate neque facere facilis
-          illo perferendis obcaecati officia.
-        </p>
-      </section>
-
-      <section className="flex flex-col gap-2">
         <h2 className="text-2xl font-bold">
           How are the predictions calculated ?
         </h2>
         <Image src={infoSvg} alt="info svg" width={400} />
-
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
-          aliquid impedit veniam rerum nisi voluptates dolorum incidunt dicta
-          quaerat hic in aspernatur rem expedita a deserunt, aut adipisci
-          soluta, nobis eius perferendis neque qui repellendus aperiam. Officia
-          quos dolore officiis odio doloremque? Blanditiis cum distinctio dolor
-          excepturi illum perspiciatis? Laborum!
+          Lung Vitality is an app where you can predict if you are likely to
+          Have lung cancer. The app uses “machine learning” to make These
+          predictions. Machine learning is like teaching the app's brain to
+          recognise patterns. We have fed the app a lot of data related to lung
+          cancer, like smoking, trouble swallowing etc.
+          <br />
+          <br />
+          When you take a test in the app, it looks at all the information
+          you’ve given it and compares it to what it’s learned. It’s like a
+          puzzle. By connecting the pieces, the app can make a guess about your
+          risk for lung cancer.
         </p>
       </section>
 

@@ -39,7 +39,7 @@ const QuestionDialog = (props: Props) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
         <Button className="mt-5 bg-main" onClick={() => nextPage()}>
-          Start the text
+          Start the test
         </Button>
       </DialogTrigger>
 
