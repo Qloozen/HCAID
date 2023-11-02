@@ -140,8 +140,8 @@ const QuestionForm = ({ className, nextPage }: Props) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  Do you have any known allergies, particularly ones that might
-                  affect your lung health?
+                  Do you have any known allergies that strongly affects your
+                  lung health ?
                 </FormLabel>
                 <Select
                   onValueChange={field.onChange}

@@ -19,7 +19,7 @@ def do_prediction():
     predicted_cancer = int(y_predict[0])
     
     # shap
-    explainer = joblib.load(filename="shap/explainer.bz2")
+    explainer = joblib.load(filename="shap/explainer_v2.bz2")
     shap_values = explainer.shap_values(df)
 
     shap.force_plot(explainer.expected_value, shap_values, df, matplotlib=True, show=False, plot_cmap=['#77dd77', '#f99191'])

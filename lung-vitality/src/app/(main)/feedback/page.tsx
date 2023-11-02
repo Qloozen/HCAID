@@ -1,9 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,14 +24,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { v4 as uuidv4 } from "uuid";
 
 type Props = {};
 
 const formSchema = z.object({
   rating: z.enum(["1", "2", "3", "4", "5"]),
-  fullName: z.string().min(2),
-  email: z.string().email(),
+  fullName: z.optional(z.string().min(2)),
+  email: z.optional(z.string().email()),
   feedback: z.string().min(10),
+  allowUsage: z.boolean().default(false).optional(),
 });
 
 const Feedback = (props: Props) => {
@@ -40,6 +44,17 @@ const Feedback = (props: Props) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    if (values.allowUsage) {
+      const id = uuidv4();
+      const feedbacks = localStorage.getItem("feedbacks");
+      if (feedbacks) {
+        const newFeedbacks = [...JSON.parse(feedbacks), { ...values, key: id }];
+        localStorage.setItem("feedbacks", JSON.stringify(newFeedbacks));
+      } else {
+        const newFeedbacks = [{ ...values, key: id }];
+        localStorage.setItem("feedbacks", JSON.stringify(newFeedbacks));
+      }
+    }
     console.log(values);
     setMessage("Sending feedback...");
     setTimeout(() => {
@@ -89,6 +104,9 @@ const Feedback = (props: Props) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-white">Full Name</FormLabel>
+                  <FormDescription className="text-slate-300">
+                    (Optional)
+                  </FormDescription>
                   <FormControl>
                     <Input placeholder="John Doe" {...field} />
                   </FormControl>
@@ -103,6 +121,9 @@ const Feedback = (props: Props) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-white">Email</FormLabel>
+                  <FormDescription className="text-slate-300">
+                    (Optional)
+                  </FormDescription>
                   <FormControl>
                     <Input placeholder="example@email.com" {...field} />
                   </FormControl>
@@ -127,6 +148,29 @@ const Feedback = (props: Props) => {
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="allowUsage"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 text-white">
+                  <FormControl>
+                    <Checkbox
+                      className="border-white data-[state=checked]:bg-primary-foreground data-[state=checked]:text-primary"
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel>
+                      Allow Lung Vitality to display your feedback on the
+                      website.
+                    </FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
+
             <p className="text-white">{message}</p>
             <Button type="submit">Submit</Button>
           </form>
