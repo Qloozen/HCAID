@@ -20,7 +20,7 @@ const reviews = [
     rating: "5",
     fullName: "Jennifer Lee",
     feedback:
-      "Smart Lungs truly turned my life around. I had been a long-time smoker, but this app detected a potential issue with my lung health. I heeded the app's timely alert, went for early screening, and to my shock, I was diagnosed with early-stage lung cancer. Thanks to Smart Lungs, I caught it early, received immediate treatment, and I'm now in full recovery. This app's early warning system saved my life, and I can't express how grateful I am for its role in my journey to better health.",
+      "Smart Lungs truly turned my life around. I had been a long-time smoker, but this app detected a potential issue with my lung health. I heeded the app's warning, went for early screening, and to my shock, I was diagnosed with early-stage lung cancer. Thanks to Smart Lungs, I caught it early, received immediate treatment, and I'm now in full recovery. This app's AI test saved my life, and I can't express how grateful I am for its role in my journey to better health.",
   },
   {
     key: 2,
