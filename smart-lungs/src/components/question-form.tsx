@@ -23,25 +23,37 @@ import {
   SelectValue,
 } from "./ui/select";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 const formSchema = z.object({
+  // Name, location and allergies are not used in the bad model. This is to mimic the privacy issue of unwanted data collection. (Not actually implemented)
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  location: z.string().min(2, { message: "Location must be at least 2 characters." }),
+  location: z
+    .string()
+    .min(2, { message: "Location must be at least 2 characters." }),
   age: z
     .number()
     .int()
     .min(16, { message: "You must be at least 16 years old." }),
-  gender: z.enum(["male", "female"]),
-  smoking: z.enum(["never", "rarely", "often", "daily"]),
-  allergies: z.string().min(2, { message: "Allergies must be at least 2 characters long." }),
+  gender: z.enum(["0", "1"]),
+  smoking: z.enum(["0", "1", "2", "3"]),
+  shortnessOfBreath: z.enum(["0", "1", "2", "3"]),
+  peerPressure: z.enum(["0", "1", "2", "3"]),
+  fatigue: z.enum(["0", "1", "2", "3"]),
+  allergies: z
+    .string()
+    .min(2, { message: "Allergies must be at least 2 characters long." }),
 });
 
 type Props = {
   className?: string;
-  nextPage: () => void;
+  nextPage: (results?: { cancer: string; force_plt: string }) => void;
 };
 
 const QuestionForm = ({ className, nextPage }: Props) => {
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,24 +62,63 @@ const QuestionForm = ({ className, nextPage }: Props) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // TODO: integration with machine learning model
-    console.log(values);
-    nextPage();
+    setLoading(true);
+    // Api only takes yes or no, so we need to convert the values
+    const body = {
+      smoking: values.smoking in ["0", "1"] ? 1 : 2,
+      age: values.age,
+      fatigue: values.fatigue in ["0", "1"] ? 1 : 2,
+      shortnessOfBreath: values.shortnessOfBreath in ["0", "1"] ? 1 : 2,
+      peerPressure: values.peerPressure in ["0", "1"] ? 1 : 2,
+      gender: values.gender in ["0", "1"] ? 1 : 2,
+    };
+
+    console.log(body);
+    
+    fetch("/api/predict-bad", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        nextPage(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError("Something went wrong. Please try again later.");
+        setLoading(false);
+      });
   }
 
   const frequencyOptions = (
     <SelectContent>
-      <SelectItem value="never">never</SelectItem>
-      <SelectItem value="rarely">rarely</SelectItem>
-      <SelectItem value="often">often</SelectItem>
-      <SelectItem value="daily">daily</SelectItem>
+      <SelectItem value="0">never</SelectItem>
+      <SelectItem value="1">rarely</SelectItem>
+      <SelectItem value="2">often</SelectItem>
+      <SelectItem value="3">daily</SelectItem>
+    </SelectContent>
+  );
+
+  const severityOptions = (
+    <SelectContent>
+      <SelectItem value="0">none</SelectItem>
+      <SelectItem value="1">mild</SelectItem>
+      <SelectItem value="2">moderate</SelectItem>
+      <SelectItem value="3">severe</SelectItem>
     </SelectContent>
   );
 
   const genderOptions = (
     <SelectContent>
-      <SelectItem value="male">Male</SelectItem>
-      <SelectItem value="female">Female</SelectItem>
+      <SelectItem value="0">Male</SelectItem>
+      <SelectItem value="1">Female</SelectItem>
     </SelectContent>
   );
 
@@ -182,6 +233,75 @@ const QuestionForm = ({ className, nextPage }: Props) => {
           />
           <FormField
             control={form.control}
+            name="shortnessOfBreath"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>How often are you out of breath?</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Frequency" />
+                    </SelectTrigger>
+                  </FormControl>
+
+                  {frequencyOptions}
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="fatigue"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>How often do you feel fatigued?</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Frequency" />
+                    </SelectTrigger>
+                  </FormControl>
+
+                  {frequencyOptions}
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="peerPressure"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  Do you think peer pressure, particularly in situations
+                  involving drinking and smoking, is something that affects you?
+                </FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Frequency" />
+                    </SelectTrigger>
+                  </FormControl>
+
+                  {severityOptions}
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="allergies"
             render={({ field }) => (
               <FormItem>
@@ -197,7 +317,10 @@ const QuestionForm = ({ className, nextPage }: Props) => {
                 <FormDescription>What are your allergies?</FormDescription>
                 <FormMessage />
               </FormItem>
-            )}/>
+            )}
+          />
+          {error && <p className="text-red-500">{error}</p>}
+          {loading && <p className="text-main">Loading...</p>}
           <Button type="submit">Submit</Button>
         </form>
       </Form>

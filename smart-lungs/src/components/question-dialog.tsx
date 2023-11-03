@@ -10,12 +10,16 @@ type Props = {};
 const QuestionDialog = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
+  const [testResults, setTestResults] = useState({ cancer: "", force_plt: "" });
 
   useEffect(() => {
     setPageIndex(0);
   }, [open]);
 
-  const nextPage = () => {
+  const nextPage = (results?: { cancer: string; force_plt: string }) => {
+    if (results) {
+      setTestResults(results);
+    }
     if (pageIndex < pages.length - 1) {
       setPageIndex(pageIndex + 1);
     } else {
@@ -25,7 +29,7 @@ const QuestionDialog = (props: Props) => {
 
   const pages = [
     <QuestionForm key={0} nextPage={nextPage} />,
-    <TestResults key={1} nextPage={nextPage} />,
+    <TestResults key={1} nextPage={nextPage} testResults={testResults}  />,
   ];
 
   return (
