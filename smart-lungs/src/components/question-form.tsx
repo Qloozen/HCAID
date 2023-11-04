@@ -26,7 +26,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 
 const formSchema = z.object({
-  // Name, location and allergies are not used in the bad model. This is to mimic the privacy issue of unwanted data collection. (Not actually implemented)
+  // Name and location are not used in the bad model. This is to mimic the privacy issue of unwanted data collection. (Not actually implemented)
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   location: z
     .string()
@@ -40,9 +40,6 @@ const formSchema = z.object({
   shortnessOfBreath: z.enum(["0", "1", "2", "3"]),
   peerPressure: z.enum(["0", "1", "2", "3"]),
   fatigue: z.enum(["0", "1", "2", "3"]),
-  allergies: z
-    .string()
-    .min(2, { message: "Allergies must be at least 2 characters long." }),
 });
 
 type Props = {
@@ -74,7 +71,7 @@ const QuestionForm = ({ className, nextPage }: Props) => {
     };
 
     console.log(body);
-    
+
     fetch("/api/predict-bad", {
       method: "POST",
       body: JSON.stringify(body),
@@ -296,25 +293,6 @@ const QuestionForm = ({ className, nextPage }: Props) => {
 
                   {severityOptions}
                 </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="allergies"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Do you have any allergies?</FormLabel>
-                <FormControl>
-                  <Input
-                    className="w-min"
-                    type="text"
-                    {...field}
-                    onChange={field.onChange}
-                  />
-                </FormControl>
-                <FormDescription>What are your allergies?</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
