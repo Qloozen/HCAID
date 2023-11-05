@@ -62,15 +62,13 @@ const QuestionForm = ({ className, nextPage }: Props) => {
     setLoading(true);
     // Api only takes yes or no, so we need to convert the values
     const body = {
-      smoking: values.smoking in ["0", "1"] ? 1 : 2,
+      smoking: values.smoking == "0" ? 1 : 2,
       age: values.age,
       fatigue: values.fatigue in ["0", "1"] ? 1 : 2,
       shortnessOfBreath: values.shortnessOfBreath in ["0", "1"] ? 1 : 2,
       peerPressure: values.peerPressure in ["0", "1"] ? 1 : 2,
       gender: values.gender in ["0", "1"] ? 1 : 2,
     };
-
-    console.log(body);
 
     fetch("/api/predict-bad", {
       method: "POST",
